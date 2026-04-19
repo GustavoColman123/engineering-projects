@@ -1,4 +1,4 @@
-# Day 1 — CD4017 Sequencer
+# Day 2 — CD4017 Sequencer
 
 ## Goal
 Integrate the CD4017 decade counter with the NE555 timer to create a sequential LED system.

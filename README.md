@@ -6,8 +6,6 @@ The purpose of this repository is to document my learning process through real c
 
 Each project is treated as a small engineering exercise, not just as a final result.
 
----
-
 ## Repository Structure
 
 Each folder represents an individual project.
@@ -24,8 +22,6 @@ A project may include:
 - Photos or diagrams
 
 The goal is to make each project understandable, reproducible, and useful for future learning.
-
----
 
 ## Projects
 
@@ -53,8 +49,6 @@ Status:
 Functional breadboard prototype completed.
 ```
 
----
-
 ### [4017 LED Sequencer](./4017-sequencer/)
 
 A sequential LED circuit using the CD4017 decade counter.
@@ -75,8 +69,6 @@ Status:
 ```text
 Functional circuit completed and documented.
 ```
-
----
 
 ### [NE555 LED Blinking Circuit](./ne555-led-blink/)
 
@@ -99,8 +91,6 @@ Status:
 Completed.
 ```
 
----
-
 ## Learning Goals
 
 This repository is part of my long-term learning path in electronics, embedded systems, and computer engineering.
@@ -113,8 +103,6 @@ The main goals are:
 - Improve technical documentation
 - Develop projects that can be reviewed later
 - Build a foundation for more advanced embedded and robotics projects
-
----
 
 ## Tools and Technologies
 
@@ -135,8 +123,6 @@ Tools and components used across the projects include:
 - CMake
 - Git and GitHub
 
----
-
 ## Documentation Philosophy
 
 The purpose of this repository is not only to show working projects.
@@ -151,8 +137,6 @@ It is also meant to show the process:
 - What was learned from each project
 
 Mistakes and debugging notes are included because they are part of real engineering work.
-
----
 
 ## Current Status
 

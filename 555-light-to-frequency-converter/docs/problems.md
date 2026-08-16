@@ -1,12 +1,14 @@
 # Problems and Debugging
 
-## 1. First Assembly Did Not Oscillate
+## 1. The Main Debugging Story — Two Hours, No Culprit, Then a Rebuild
 
 ### Problem
 
 The first build did not produce the expected blinking output.
 
-At the same time, supply-voltage measurements became inconsistent and significantly lower than the intended value.
+What followed was the most ironic part of the project: a very small circuit turned into roughly two hours of troubleshooting.
+
+The working hypothesis kept moving between the oscillator wiring, breadboard contacts, NE555 placement, the power module, the external adapter, and the voltage measurements.
 
 ### Debugging Performed
 
@@ -17,19 +19,43 @@ The circuit was progressively isolated:
 - the breadboard power module was tested separately
 - the external adapter was measured
 - other breadboard power modules were compared
+- connections were repeatedly checked
+- the circuit was reduced and inspected step by step
 
 Several low and inconsistent voltage readings were observed during this process.
 
+Despite all of that work, no single failure mechanism could be demonstrated with confidence.
+
+### The Irony
+
+The sequence was effectively:
+
+```text
+build circuit
+-> circuit does not work
+-> spend roughly two hours looking for the culprit
+-> fail to isolate one definitive culprit
+-> clear the breadboard
+-> rebuild the same intended circuit from zero
+-> circuit works
+```
+
+This is important because the successful rebuild did **not** retroactively diagnose the first build.
+
+It only proved that a clean implementation of the intended topology could work.
+
 ### Important Engineering Note
 
-The exact root cause was **not conclusively isolated**.
+The exact root cause of the first failure was **not conclusively isolated**.
 
 Possible contributors included:
 
 - breadboard contact problems
 - a wiring mistake
-- unstable or unsuitable power delivery
-- measurement/setup error during troubleshooting
+- an unstable connection
+- component placement error
+- unsuitable power delivery
+- measurement/setup confusion during troubleshooting
 - a combination of the above
 
 Because the evidence did not isolate one cause, no single explanation is claimed as fact.
@@ -40,13 +66,13 @@ The project was completely restarted from zero.
 
 The breadboard was cleared and the same intended circuit topology was rebuilt carefully.
 
-After the rebuild, the oscillator worked and the LED responded correctly to the LDR.
+After the rebuild, the oscillator worked immediately enough to show a clear LED blink and the expected response to the LDR.
 
 ---
 
-## 2. Power Supply Does Not Match the Intended Test Voltage
+## 2. The Power Supply Is Still a Real Problem — But It Was Not Proven to Be the Main Failure
 
-### Problem
+### Observation
 
 During the successful circuit test, the supply rails measured approximately:
 
@@ -54,19 +80,31 @@ During the successful circuit test, the supply rails measured approximately:
 3.8 V
 ```
 
-This is lower than the intended `5 V` test supply.
+The breadboard power arrangement also repeatedly produced values around `4 V` or below during troubleshooting, despite the intended test target being approximately `5 V`.
 
-### Effect
+### Why This Matters
 
-The circuit still produced a clear oscillating output and responded to changes in light, so the proof of concept was successful.
+The supply is still considered inadequate for final characterization.
 
-However, this power arrangement is not considered suitable for final quantitative characterization.
+A future test setup should provide a stable, verified supply close to the intended `5 V` value before quantitative frequency measurements are treated as final.
 
-### Current Decision
+### Why It Is Not Listed as the Root Cause
 
-Do not treat measurements from the current supply as final frequency-performance data.
+The rebuilt circuit worked while the same general power limitation was still present.
 
-A stable, known supply should be used before theoretical-vs-experimental error calculations are finalized.
+Therefore the low supply voltage cannot, by itself, be claimed as the proven cause of the first non-working build.
+
+This distinction matters:
+
+```text
+Known limitation:
+current power system provides less voltage than intended
+
+Unknown:
+what specifically prevented the first assembly from oscillating
+```
+
+The power issue remains a separate engineering task, not a convenient explanation for an unresolved failure.
 
 ---
 
@@ -74,17 +112,21 @@ A stable, known supply should be used before theoretical-vs-experimental error c
 
 ### Problem
 
-The initial debugging path involved the NE555, breadboard rails, power modules, external adapter, and multimeter measurements simultaneously.
+The actual oscillator contains only a small number of parts, yet the debugging process expanded into the NE555, breadboard rails, multiple power modules, the adapter, wiring, contacts, and multimeter readings.
 
-This created too many possible failure points at once.
+At one point, diagnosing the test setup became harder than understanding the circuit itself.
 
 ### Lesson
 
-When a small circuit behaves unexpectedly, simplify the system aggressively.
+When a small prototype enters a state that is no longer trustworthy, simplify aggressively.
 
-A complete rebuild can be more reliable than continuing to modify a state that is no longer understood.
+A clean rebuild can be more useful than continuing to patch an uncertain breadboard state.
 
-The successful second build demonstrated the value of returning to a known baseline.
+However:
+
+> A successful rebuild is a recovery method, not a root-cause analysis.
+
+The project recovered, but the original failure remains intentionally unresolved in the record.
 
 ---
 
@@ -125,3 +167,11 @@ Most importantly:
 > Do not invent a root cause just because the circuit works after rebuilding it.
 
 A failure is only diagnosed when evidence isolates the cause.
+
+And for this project specifically:
+
+```text
+The first failure remains unresolved.
+The rebuild is confirmed working.
+The low-voltage power supply remains a separate known limitation.
+```

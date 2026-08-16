@@ -10,9 +10,34 @@ During the successful v0.1 functional test, the measured voltage across the supp
 VCC ≈ 3.800 V
 ```
 
-This value was measured while the circuit was operating and the LED was blinking.
+This value was measured while the rebuilt circuit was operating and the LED was blinking.
 
-The current power arrangement is therefore treated as provisional. Final quantitative frequency characterization will be repeated with a stable and known supply.
+During the earlier troubleshooting session, the breadboard power arrangement also produced values around `4 V` or below instead of the intended approximately `5 V`.
+
+### Interpretation
+
+This is a confirmed limitation of the current test setup.
+
+It should **not** be confused with the unresolved root cause of the first failed build.
+
+The reason is straightforward:
+
+```text
+first build + low-voltage supply -> did not work
+rebuilt circuit + same general low-voltage limitation -> worked
+```
+
+Therefore the low supply voltage remains a real problem to correct, but it does not by itself explain why the first assembly failed.
+
+### Future Requirement
+
+Final quantitative frequency characterization should be repeated with a stable, verified supply close to:
+
+```text
+VCC ≈ 5 V
+```
+
+The supply voltage should be recorded for every quantitative test.
 
 ## 2. Nominal Component Values
 
@@ -60,7 +85,7 @@ Planned table:
 
 Pending.
 
-The first v0.1 test was qualitative only. The LED visibly changed blink rate, but no calibrated period or frequency measurement was taken.
+The first successful v0.1 test was qualitative only. The LED visibly changed blink rate, but no calibrated period or frequency measurement was taken.
 
 Planned table:
 
@@ -94,3 +119,24 @@ Future measurements should record:
 - repeated trials if practical
 
 The objective is to make the final comparison reproducible rather than relying only on visual impressions.
+
+## 8. Measurement Lesson From the First Session
+
+The first session produced an important distinction between measurement and diagnosis.
+
+A suspicious voltage reading can identify a real weakness in the setup without proving that it caused a different failure.
+
+For this project:
+
+```text
+measured fact:
+supply is lower than intended
+
+measured fact:
+rebuilt circuit still oscillates under that supply
+
+unresolved question:
+why the first assembly did not oscillate
+```
+
+Keeping those statements separate prevents the documentation from turning a plausible suspicion into a false conclusion.

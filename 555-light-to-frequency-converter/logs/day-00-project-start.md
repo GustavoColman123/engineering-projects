@@ -43,11 +43,13 @@ The circuit was assembled incrementally:
 
 Solid-core AWG 22 wire was used for some short breadboard connections.
 
-## First Attempt
+## First Attempt — The Circuit Does Not Work
 
 The first assembled circuit did not produce the expected output.
 
-Supply measurements also appeared unexpectedly low and inconsistent during troubleshooting.
+At the same time, supply measurements appeared unexpectedly low and inconsistent.
+
+What began as a small NE555 experiment turned into roughly two hours of troubleshooting.
 
 The debugging process expanded to include:
 
@@ -56,8 +58,29 @@ The debugging process expanded to include:
 - multiple breadboard power modules
 - the external DC adapter
 - direct voltage measurements
+- repeated wiring and contact checks
 
-The evidence did not establish one definitive root cause.
+The power supply became an obvious suspect because several readings were around `4 V` or below instead of the intended approximately `5 V`.
+
+However, the evidence never established one definitive root cause for the non-working first build.
+
+## The Debugging Irony
+
+The session can be summarized almost absurdly as:
+
+```text
+build the circuit
+-> it does not work
+-> spend roughly two hours searching for the fault
+-> fail to identify one definitive culprit
+-> remove everything
+-> rebuild from zero
+-> it works
+```
+
+That sequence is intentionally preserved in the project history.
+
+The successful rebuild is evidence that the intended circuit topology works. It is **not** evidence that a specific suspected fault caused the first failure.
 
 ## Reset
 
@@ -78,7 +101,7 @@ LDR covered -> LED blink rate decreased
 
 This confirmed the core light-to-frequency concept.
 
-## Supply Observation
+## Supply Observation — Still Unresolved as a Separate Issue
 
 While the successful circuit was operating, the measured rail voltage was approximately:
 
@@ -86,22 +109,53 @@ While the successful circuit was operating, the measured rail voltage was approx
 VCC ≈ 3.8 V
 ```
 
-The circuit therefore works as a proof of concept, but the current power arrangement will not be used as the final basis for precision characterization.
+This is still lower than the intended approximately `5 V` supply.
+
+The important distinction is that the rebuilt circuit operated while this low-voltage condition was still present.
+
+Therefore:
+
+```text
+first-build root cause: unresolved
+low-voltage supply: confirmed separate limitation
+```
+
+The current power arrangement is sufficient for the v0.1 qualitative proof of concept, but it should be replaced or corrected before final quantitative characterization.
+
+A future setup should provide a stable, verified supply close to `5 V`.
 
 ## End-of-Day Status
 
 ```text
-[PASS] NE555 oscillator functional
+[PASS] NE555 oscillator functional after clean rebuild
 [PASS] LED output functional
 [PASS] LDR changes oscillation rate
 [PASS] qualitative model confirmed
+[PASS] photographic evidence added to repository
+[UNRESOLVED] exact cause of first failed build
+[KNOWN LIMITATION] supply remains around 4 V or below instead of intended ~5 V
 [PENDING] stable regulated test supply
 [PENDING] LDR resistance measurements
 [PENDING] theoretical frequency calculations with measured values
 [PENDING] measured frequency comparison
 [PENDING] Xournal++ mathematical/visual documentation
-[PENDING] photographic evidence in repository
 ```
+
+## Main Lesson From Day 00
+
+The circuit itself was simpler than the debugging session.
+
+The most valuable result was not merely that the LED eventually blinked, but that the project produced a clear example of the difference between:
+
+```text
+finding a way to recover a system
+and
+actually proving why it failed
+```
+
+The rebuild recovered the system.
+
+The original fault was never proven.
 
 ## Next Session
 
@@ -111,4 +165,5 @@ The next session will focus on the mathematical and experimental side of the pro
 2. derive the timing equations
 3. measure the LDR in several lighting conditions
 4. calculate predicted frequencies
-5. prepare the project for measured-vs-theoretical comparison
+5. obtain or prepare a stable verified supply near 5 V
+6. prepare the project for measured-vs-theoretical comparison

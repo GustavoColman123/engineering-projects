@@ -29,6 +29,60 @@ The goal is to make each project understandable, reproducible, and useful for fu
 
 ## Projects
 
+### [555 Light-to-Frequency Converter](./555-light-to-frequency-converter/)
+
+A light-sensitive oscillator built around an NE555 timer in astable mode.
+
+An LDR replaces one of the fixed timing resistances, converting changes in illumination into changes in oscillator frequency without a microcontroller.
+
+Main concepts used:
+
+* NE555 astable oscillator behavior
+* LDR photoresistor response
+* RC timing networks
+* Light-to-frequency conversion
+* Capacitor charge/discharge timing
+* Mathematical modeling of oscillator frequency
+* Qualitative experimental validation
+* Breadboard debugging and measurement discipline
+
+Important technical result:
+
+```text
+The rebuilt v0.1 circuit produced a clear blinking output.
+More light on the LDR increased the blink rate.
+Covering the LDR reduced the blink rate.
+```
+
+Current limitation:
+
+```text
+The working prototype measured approximately 3.8 V across the supply rails.
+Quantitative characterization is deferred until a stable, known supply is available.
+```
+
+Status:
+
+```text
+v0.1 functional breadboard proof of concept completed.
+Mathematical and quantitative characterization in progress.
+```
+
+Documentation:
+
+* [Project README](./555-light-to-frequency-converter/README.md)
+* [System design](./555-light-to-frequency-converter/docs/design.md)
+* [Wiring](./555-light-to-frequency-converter/docs/wiring.md)
+* [Theory and mathematical model](./555-light-to-frequency-converter/docs/theory.md)
+* [Measurements](./555-light-to-frequency-converter/docs/measurements.md)
+* [Experiments](./555-light-to-frequency-converter/docs/experiments.md)
+* [Problems and debugging](./555-light-to-frequency-converter/docs/problems.md)
+* [Lessons learned](./555-light-to-frequency-converter/docs/lessons.md)
+* [Day 0 log](./555-light-to-frequency-converter/logs/day-00-project-start.md)
+* [Xournal++ plan](./555-light-to-frequency-converter/xournal/README.md)
+
+---
+
 ### [Pico Resilience Monitor v0](./pico-resilience-monitor-v0/)
 
 A Raspberry Pi Pico environmental monitoring prototype built with C and the Pico SDK.
@@ -182,6 +236,7 @@ Tools and components used across the projects include:
 * C
 * CMake
 * Git and GitHub
+* Xournal++
 * NE555 timer
 * CD4017 decade counter
 * LCD1602 I2C display
@@ -230,6 +285,7 @@ The projects are small, but they are documented seriously and are intended to bu
 Current documented projects:
 
 ```text
+555 Light-to-Frequency Converter
 Pico Resilience Monitor v0
 Embedded Desk Terminal v0
 4017 LED Sequencer

@@ -129,13 +129,37 @@ less light
 
 ## Visual Evidence
 
-The v0.1 build has photographic evidence for three relevant states:
+The following photographs show the three main states used to validate the v0.1 prototype.
 
-- Normal ambient-light configuration
-- LED illuminated during the oscillator cycle
-- LDR deliberately covered during the slow-blink test
+### 1. Normal Ambient-Light State
 
-See [Photo evidence](./docs/evidence.md) for the complete annotated set.
+The complete circuit is assembled and powered under normal room lighting. The NE555, LDR, timing capacitor, resistors, LED, jumper wiring, and power module are all visible. This image serves as the main physical reference for the working breadboard prototype.
+
+![Normal ambient-light state](./hardware/photos/01-normal-ambient-light.jpg)
+
+### 2. Oscillator Output — LED Active
+
+The LED is captured while illuminated during one of the NE555 output cycles. In operation, the output repeatedly changes state, causing the LED to turn on and off. A still image cannot represent the frequency itself, but it provides visual evidence that the oscillator output stage is active.
+
+![LED illuminated during oscillator cycle](./hardware/photos/02-led-blink-state.jpg)
+
+### 3. LDR Covered — Lower Oscillation Frequency
+
+The LDR is deliberately covered to reduce the incident light. As the illumination decreases, the LDR resistance increases. Because the LDR is part of the NE555 timing network, the capacitor takes longer to complete each timing cycle and the oscillator frequency decreases. The observed result is a visibly slower LED blink rate.
+
+```text
+less light
+-> higher LDR resistance
+-> longer timing interval
+-> lower oscillation frequency
+-> slower blinking
+```
+
+![LDR covered during slow-blink test](./hardware/photos/03-ldr-covered-response.jpg)
+
+The opposite behavior was observed when more light reached the LDR: its resistance decreased and the LED blink rate increased.
+
+For the complete annotated evidence record, see [Photo evidence](./docs/evidence.md).
 
 ## Documentation
 

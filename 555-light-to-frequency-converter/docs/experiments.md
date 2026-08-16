@@ -17,9 +17,21 @@ The circuit was assembled on a breadboard using:
 - LED output with 330 Ω current-limiting resistor
 - 100 nF supply decoupling capacitor
 
+### Build History
+
+The first assembly did not oscillate correctly.
+
+Roughly two hours were spent troubleshooting the circuit, breadboard connections, power modules, adapter, and voltage readings without conclusively isolating one root cause.
+
+The circuit was then cleared and rebuilt from zero using the same intended topology.
+
+The rebuilt version worked.
+
+This is recorded as a recovery through clean reconstruction, not as a definitive diagnosis of the original failure.
+
 ### Procedure
 
-1. Power the completed circuit.
+1. Power the completed rebuilt circuit.
 2. Observe the LED under normal ambient light.
 3. Cover the LDR to reduce the incident light.
 4. Observe the change in LED blink rate.
@@ -27,7 +39,7 @@ The circuit was assembled on a breadboard using:
 
 ### Observation
 
-The LED blinked clearly while the circuit was operating.
+The LED blinked clearly while the rebuilt circuit was operating.
 
 When the LDR was covered, the LED blink rate became noticeably slower.
 
@@ -46,11 +58,25 @@ more light -> lower LDR resistance -> higher frequency
 less light -> higher LDR resistance -> lower frequency
 ```
 
-### Limitation
+### Supply Limitation
 
-No calibrated frequency measurement was performed during this test.
+The measured supply rail during the successful test was approximately:
 
-The measured supply rail was approximately `3.8 V`, so this run is treated as a functional proof of concept rather than final quantitative characterization.
+```text
+VCC ≈ 3.8 V
+```
+
+This is below the intended approximately `5 V` test supply.
+
+However, because the rebuilt circuit worked while this same power limitation was still present, the low supply is **not** treated as the proven cause of the failed first assembly.
+
+It remains a separate known limitation of the test setup.
+
+### Interpretation
+
+Experiment 0 validates the concept only at the qualitative level.
+
+It demonstrates that the oscillator responds to light in the predicted direction, but it does not yet provide final frequency-performance data.
 
 ---
 
@@ -119,7 +145,9 @@ Measure actual oscillation period/frequency under the same lighting conditions u
 
 ### Requirement
 
-Use a stable, known power supply before treating the results as final.
+Use a stable, known power supply close to the intended `5 V` before treating the results as final.
+
+The current approximately `3.8–4 V` power arrangement is adequate for the v0.1 proof of concept but not preferred for final characterization.
 
 ### Planned Comparison
 

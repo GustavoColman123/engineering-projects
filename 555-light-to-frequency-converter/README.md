@@ -32,7 +32,53 @@ Observed behavior:
 - When the LDR is covered, the LED blinks more slowly
 - The LED output is clearly visible and the circuit responds immediately to large light changes
 
-The prototype was measured at approximately `3.8 V` across the supply rails while operating. This is not considered the final characterization supply. A stable regulated supply will be used for later quantitative measurements.
+The prototype was measured at approximately `3.8 V` across the supply rails while operating. This is not considered the final characterization supply. A stable regulated supply close to the intended `5 V` will be used for later quantitative measurements.
+
+## The Debugging Story
+
+The most memorable part of v0.1 was not the final circuit. It was getting there.
+
+The first assembly did not work.
+
+Roughly two hours were then spent checking wiring, breadboard contacts, the NE555, supply rails, multiple breadboard power modules, the external adapter, and voltage measurements.
+
+No single culprit was conclusively isolated.
+
+Eventually the entire breadboard was cleared and the circuit was rebuilt from zero using the same intended topology.
+
+It worked.
+
+The sequence was essentially:
+
+```text
+build
+-> does not work
+-> troubleshoot for roughly two hours
+-> no definitive root cause found
+-> rebuild from zero
+-> works
+```
+
+This is intentionally documented rather than cleaned up into a fictional neat diagnosis.
+
+A successful rebuild is evidence that the intended circuit can work. It is **not** proof of why the first build failed.
+
+### Separate Power-Supply Limitation
+
+The power setup still remains imperfect.
+
+The intended test supply is approximately `5 V`, but the successful prototype measured approximately `3.8 V`, and values around `4 V` or below were repeatedly observed during troubleshooting.
+
+However, the rebuilt circuit worked while that limitation was still present.
+
+Therefore:
+
+```text
+first-build root cause: unresolved
+low-voltage supply: confirmed separate limitation
+```
+
+The next hardware improvement is not to redesign the oscillator, but to obtain or prepare a stable, verified supply near `5 V` for final characterization.
 
 ## Hardware
 
@@ -176,19 +222,29 @@ For the complete annotated evidence record, see [Photo evidence](./docs/evidence
 
 ## Next Steps
 
-1. Measure the LDR resistance under controlled light conditions
-2. Calculate predicted frequencies from the measured resistance values
-3. Record the mathematical derivation in Xournal++
-4. Export the Xournal++ pages to PDF for GitHub
-5. Obtain a stable regulated supply for final measurements
+1. Obtain or prepare a stable, verified supply near `5 V`
+2. Measure the LDR resistance under controlled light conditions
+3. Calculate predicted frequencies from the measured resistance values
+4. Record the mathematical derivation in Xournal++
+5. Export the Xournal++ pages to PDF for GitHub
 6. Measure real oscillation periods/frequencies
 7. Compare theoretical and experimental results
 8. Calculate percentage error and discuss possible causes
 
 ## Engineering Note
 
-The first assembly did not oscillate correctly and produced confusing supply measurements. The circuit was completely rebuilt from zero, after which the expected light-dependent behavior appeared immediately.
+The first assembly failed, the exact cause was not conclusively isolated, and a clean rebuild worked.
 
-The exact cause of the first failure was not conclusively isolated, so this repository does not claim a specific root cause.
+That unresolved failure is part of the project rather than something to hide.
 
-That uncertainty is intentionally preserved as part of the engineering record.
+The low-voltage power supply remains a known issue, but because the rebuilt circuit worked under the same general limitation, it is not presented as the proven cause of the original failure.
+
+The project therefore preserves three separate statements:
+
+```text
+1. The first assembly failed.
+2. The rebuild worked.
+3. The supply still needs improvement.
+```
+
+That separation is intentional and is part of the engineering record.

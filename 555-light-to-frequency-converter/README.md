@@ -127,6 +127,16 @@ less light
    -> slower LED blinking
 ```
 
+## Visual Evidence
+
+The v0.1 build has photographic evidence for three relevant states:
+
+- Normal ambient-light configuration
+- LED illuminated during the oscillator cycle
+- LDR deliberately covered during the slow-blink test
+
+See [Photo evidence](./docs/evidence.md) for the complete annotated set.
+
 ## Documentation
 
 - [System design](./docs/design.md)
@@ -136,6 +146,7 @@ less light
 - [Experiments](./docs/experiments.md)
 - [Problems and debugging](./docs/problems.md)
 - [Lessons learned](./docs/lessons.md)
+- [Photo evidence](./docs/evidence.md)
 - [Day 0 build log](./logs/day-00-project-start.md)
 - [Xournal++ plan](./xournal/README.md)
 
@@ -149,7 +160,6 @@ less light
 6. Measure real oscillation periods/frequencies
 7. Compare theoretical and experimental results
 8. Calculate percentage error and discuss possible causes
-9. Add photographic evidence of the working breadboard
 
 ## Engineering Note
 
